@@ -32,6 +32,12 @@ export class AppComponent implements OnInit {
     );
   }
 
+  onEditBook() {}
+
+  onDeleteBook(bookId: number) {
+    this.bookService.deleteBook(bookId);
+  }
+
   onClearBooks() {}
 
   private fetchBooks() {

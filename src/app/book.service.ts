@@ -37,4 +37,11 @@ export class BookService {
         })
       );
   }
+
+  deleteBook(bookId: number) {
+    let apiUrl = 'http://localhost:8080/v1/deleteBook/' + bookId;
+    this.http.delete(apiUrl).subscribe((responseData) => {
+      console.log(responseData);
+    });
+  }
 }

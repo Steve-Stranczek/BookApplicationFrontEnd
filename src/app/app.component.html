@@ -33,18 +33,18 @@
             ngModel
             name="genreId"
           />
-          </div>
-          <div class="form-group">
-            <label for="genreId">Number of Pages</label>
-            <input
-              class="form-control"
-              id="numPages"
-              type="number"
-              required
-              ngModel
-              name="numPages"
-            />
-            </div>
+        </div>
+        <div class="form-group">
+          <label for="genreId">Number of Pages</label>
+          <input
+            class="form-control"
+            id="numPages"
+            type="number"
+            required
+            ngModel
+            name="numPages"
+          />
+        </div>
         <button
           class="btn btn-primary"
           type="submit"
@@ -61,31 +61,30 @@
       <button class="btn btn-primary" (click)="onFetchBooks()">
         Fetch All Books
       </button>
-      |
-      <button
-        class="btn btn-danger"
-        [disabled]="bookArray.length < 1"
-        (click)="onClearBooks()"
-      >
-        Clear Books
-      </button>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-12 col-md-6 col-md-offset-3">
-      <p *ngIf="bookArray.length < 1 ">No books!</p>
-      <ul class="list-group" *ngIf="bookArray.length >=  1">
+      <p *ngIf="bookArray.length < 1">No books!</p>
+      <ul class="list-group" *ngIf="bookArray.length >= 1">
         <li class="list-group-item" *ngFor="let book of bookArray">
           <h3>{{ book.bookTitle }}</h3>
           <p>Author: {{ book.author }}</p>
-          <p>Genre: {{book.genre}}</p>
-          <p>Number of Pages {{book.numPages}}</p>
+          <p>Genre: {{ book.genre }}</p>
+          <p>Number of Pages {{ book.numPages }}</p>
+          <div class="row">
+            <button class="btn btn-primary" (click)="onEditBook()">
+              Edit Book
+            </button>
+            <button class="btn btn-danger" (click)="onDeleteBook(book.bookId)">
+              Delete Book
+            </button>
+          </div>
         </li>
       </ul>
       <p *ngIf="isFetching">Loading...</p>
     </div>
   </div>
 </div>
-
 
 <router-outlet></router-outlet>
