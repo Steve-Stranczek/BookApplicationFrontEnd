@@ -10,5 +10,19 @@ export class BookService {
 
   createAndStorePost(title: string, content: string) {}
 
-  fetchPosts() {}
+  fetchBooks() {
+    return this.http
+      .get<{ [key: number]: Book }>('http://localhost:8080/v1//books')
+      .pipe(
+        map((responseData) => {
+          const bookArray: Book[] = [];
+          for (const key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              bookArray.push({ ...responseData[key] });
+            }
+          }
+          return bookArray;
+        })
+      );
+  }
 }

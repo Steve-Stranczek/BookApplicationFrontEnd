@@ -19,9 +19,20 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {}
 
-  onFetchBooks() {}
+  onFetchBooks() {
+    this.fetchBooks();
+  }
 
   onInsertBook(bookData: Book) {}
 
   onClearBooks() {}
+
+  private fetchBooks() {
+    this.isFetching = true;
+    this.bookService.fetchBooks().subscribe((books) => {
+      this.isFetching = false;
+      this.bookArray = books;
+      console.log(books);
+    });
+  }
 }
