@@ -1,4 +1,5 @@
 <div class="container">
+  <h1>Steve's Library</h1>
   <div class="row">
     <div class="col-xs-12 col-md-6 col-md-offset-3">
       <form #bookForm="ngForm" (ngSubmit)="onInsertBook(bookForm.value)">
@@ -25,14 +26,18 @@
         </div>
         <div class="form-group">
           <label for="genreId">Genre</label>
-          <input
+          <select
             class="form-control"
             id="genreId"
             type="number"
             required
             ngModel
             name="genreId"
-          />
+          >
+            <option value="1">Post Modern</option>
+            <option value="2">Horror</option>
+            <option value="3">Fantasy</option>
+          </select>
         </div>
         <div class="form-group">
           <label for="genreId">Number of Pages</label>
