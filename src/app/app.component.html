@@ -3,14 +3,14 @@
     <div class="col-xs-12 col-md-6 col-md-offset-3">
       <form #bookForm="ngForm" (ngSubmit)="onInsertBook(bookForm.value)">
         <div class="form-group">
-          <label for="title">Title</label>
+          <label for="bookTitle">Title</label>
           <input
-            type="text"
+            type="bookTitle"
             class="form-control"
             id="title"
             required
             ngModel
-            name="title"
+            name="bookTitle"
           />
         </div>
         <div class="form-group">
@@ -28,6 +28,7 @@
           <input
             class="form-control"
             id="genreId"
+            type="number"
             required
             ngModel
             name="genreId"
@@ -38,6 +39,7 @@
             <input
               class="form-control"
               id="numPages"
+              type="number"
               required
               ngModel
               name="numPages"

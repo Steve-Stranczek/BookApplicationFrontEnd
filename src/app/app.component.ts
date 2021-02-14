@@ -23,7 +23,14 @@ export class AppComponent implements OnInit {
     this.fetchBooks();
   }
 
-  onInsertBook(bookData: Book) {}
+  onInsertBook(bookData: Book) {
+    this.bookService.InsertBook(
+      bookData.bookTitle,
+      bookData.author,
+      bookData.genreId,
+      bookData.numPages
+    );
+  }
 
   onClearBooks() {}
 

@@ -8,7 +8,19 @@ import { Book } from './book.model';
 export class BookService {
   constructor(private http: HttpClient) {}
 
-  createAndStorePost(title: string, content: string) {}
+  InsertBook(title: string, author: string, genreId: number, numPages: number) {
+    const book: Book = {
+      bookTitle: title,
+      author: author,
+      genreId: genreId,
+      numPages: numPages,
+    };
+    this.http
+      .post('http://localhost:8080/v1//book', book)
+      .subscribe((responseData) => {
+        console.log(responseData);
+      });
+  }
 
   fetchBooks() {
     return this.http
