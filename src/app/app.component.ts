@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 
 import { Book } from './book.model';
 import { BookService } from './book.service';
@@ -15,30 +13,38 @@ export class AppComponent implements OnInit {
   isFetching = false;
   bookArray: Book[] = [];
 
-  constructor(private http: HttpClient, private bookService: BookService) {}
+  constructor(private bookService: BookService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.fetchBooks();
+  }
 
   onFetchBooks() {
     this.fetchBooks();
   }
 
   onInsertBook(bookData: Book) {
-    this.bookService.InsertBook(
-      bookData.bookTitle,
-      bookData.author,
-      bookData.genreId,
-      bookData.numPages
-    );
+    this.bookService
+      .InsertBook(
+        bookData.bookTitle,
+        bookData.author,
+        bookData.genreId,
+        bookData.numPages
+      )
+      .subscribe((responseData) => {
+        console.log(responseData);
+        this.fetchBooks();
+      });
   }
 
   onEditBook() {}
 
   onDeleteBook(bookId: number) {
-    this.bookService.deleteBook(bookId);
+    this.bookService.deleteBook(bookId).subscribe((responseData) => {
+      console.log(responseData);
+      this.fetchBooks();
+    });
   }
-
-  onClearBooks() {}
 
   private fetchBooks() {
     this.isFetching = true;

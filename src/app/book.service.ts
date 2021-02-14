@@ -15,10 +15,10 @@ export class BookService {
       genreId: genreId,
       numPages: numPages,
     };
-    this.http
+    return this.http
       .post('http://localhost:8080/v1//book', book)
-      .subscribe((responseData) => {
-        console.log(responseData);
+      .pipe((responseData) => {
+        return responseData;
       });
   }
 
@@ -40,8 +40,8 @@ export class BookService {
 
   deleteBook(bookId: number) {
     let apiUrl = 'http://localhost:8080/v1/deleteBook/' + bookId;
-    this.http.delete(apiUrl).subscribe((responseData) => {
-      console.log(responseData);
+    return this.http.delete(apiUrl).pipe((responseData) => {
+      return responseData;
     });
   }
 }

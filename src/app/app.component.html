@@ -58,13 +58,6 @@
   <hr />
   <div class="row">
     <div class="col-xs-12 col-md-6 col-md-offset-3">
-      <button class="btn btn-primary" (click)="onFetchBooks()">
-        Fetch All Books
-      </button>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12 col-md-6 col-md-offset-3">
       <p *ngIf="bookArray.length < 1">No books!</p>
       <ul class="list-group" *ngIf="bookArray.length >= 1">
         <li class="list-group-item" *ngFor="let book of bookArray">
@@ -76,7 +69,11 @@
             <button class="btn btn-primary" (click)="onEditBook()">
               Edit Book
             </button>
-            <button class="btn btn-danger" (click)="onDeleteBook(book.bookId)">
+            <button
+              *ngIf="book.bookId"
+              class="btn btn-danger"
+              (click)="onDeleteBook(book.bookId)"
+            >
               Delete Book
             </button>
           </div>
