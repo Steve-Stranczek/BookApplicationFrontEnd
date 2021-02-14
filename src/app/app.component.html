@@ -15,14 +15,34 @@
         </div>
         <div class="form-group">
           <label for="author">Author</label>
-          <textarea
+          <input
             class="form-control"
             id="author"
             required
             ngModel
-            name="content"
-          ></textarea>
+            name="author"
+          />
         </div>
+        <div class="form-group">
+          <label for="genreId">Genre</label>
+          <input
+            class="form-control"
+            id="genreId"
+            required
+            ngModel
+            name="genreId"
+          />
+          </div>
+          <div class="form-group">
+            <label for="genreId">Number of Pages</label>
+            <input
+              class="form-control"
+              id="numPages"
+              required
+              ngModel
+              name="numPages"
+            />
+            </div>
         <button
           class="btn btn-primary"
           type="submit"
