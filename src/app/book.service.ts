@@ -44,4 +44,12 @@ export class BookService {
       return responseData;
     });
   }
+
+  updateBook(book: Book, bookId: number) {
+    return this.http
+      .put('http://localhost:8080/v1//book/' + bookId, book)
+      .pipe((responseData) => {
+        return responseData;
+      });
+  }
 }

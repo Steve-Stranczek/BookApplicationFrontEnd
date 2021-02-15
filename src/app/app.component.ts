@@ -12,6 +12,8 @@ export class AppComponent implements OnInit {
   title = 'BookServiceFrontEnd';
   isFetching = false;
   bookArray: Book[] = [];
+  isEditing = false;
+  editBook?: Book;
 
   constructor(private bookService: BookService) {}
 
@@ -37,7 +39,24 @@ export class AppComponent implements OnInit {
       });
   }
 
-  onEditBook() {}
+  onEditBook(book: Book) {
+    this.isEditing = true;
+    this.editBook = book;
+  }
+
+  onSubmitEditBook(book: Book) {
+    if (this.editBook?.bookId)
+      this.bookService
+        .updateBook(book, this.editBook.bookId)
+        .subscribe((response) => {
+          this.isEditing = false;
+          this.fetchBooks();
+        });
+  }
+
+  onCancelEdit() {
+    this.isEditing = false;
+  }
 
   onDeleteBook(bookId: number) {
     this.bookService.deleteBook(bookId).subscribe((responseData) => {

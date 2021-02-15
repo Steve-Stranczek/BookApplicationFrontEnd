@@ -2,7 +2,11 @@
   <h1>Steve's Library</h1>
   <div class="row">
     <div class="col-xs-12 col-md-6 col-md-offset-3">
-      <form #bookForm="ngForm" (ngSubmit)="onInsertBook(bookForm.value)">
+      <form
+        #bookForm="ngForm"
+        *ngIf="!isEditing"
+        (ngSubmit)="onInsertBook(bookForm.value)"
+      >
         <div class="form-group">
           <label for="bookTitle">Title</label>
           <input
@@ -40,7 +44,7 @@
           </select>
         </div>
         <div class="form-group">
-          <label for="genreId">Number of Pages</label>
+          <label for="numPages">Number of Pages</label>
           <input
             class="form-control"
             id="numPages"
@@ -64,14 +68,14 @@
   <div class="row">
     <div class="col-xs-12 col-md-6 col-md-offset-3">
       <p *ngIf="bookArray.length < 1">No books!</p>
-      <ul class="list-group" *ngIf="bookArray.length >= 1">
+      <ul class="list-group" *ngIf="bookArray.length >= 1 && !isEditing">
         <li class="list-group-item" *ngFor="let book of bookArray">
           <h3>{{ book.bookTitle }}</h3>
           <p>Author: {{ book.author }}</p>
           <p>Genre: {{ book.genre }}</p>
           <p>Number of Pages {{ book.numPages }}</p>
           <div class="row">
-            <button class="btn btn-primary" (click)="onEditBook()">
+            <button class="btn btn-primary" (click)="onEditBook(book)">
               Edit Book
             </button>
             <button
@@ -84,6 +88,74 @@
           </div>
         </li>
       </ul>
+      <div *ngIf="isEditing && editBook" class="row">
+        <div class="col-xs-12 col-md-6 col-md-offset-3">
+          <form
+            #editForm="ngForm"
+            (ngSubmit)="onSubmitEditBook(editForm.value)"
+          >
+            <div class="form-group">
+              <label for="bookTitle">Title</label>
+              <input
+                type="bookTitle"
+                class="form-control"
+                id="title"
+                required
+                [ngModel]="editBook.bookTitle"
+                name="bookTitle"
+              />
+            </div>
+            <div class="form-group">
+              <label for="author">Author</label>
+              <input
+                class="form-control"
+                id="author"
+                required
+                [ngModel]="editBook.author"
+                name="author"
+              />
+            </div>
+            <div class="form-group">
+              <label for="genreId">Genre</label>
+              <select
+                class="form-control"
+                id="genreId"
+                type="number"
+                required
+                [ngModel]="editBook.genreId"
+                name="genreId"
+              >
+                <option value="1">Post Modern</option>
+                <option value="2">Horror</option>
+                <option value="3">Fantasy</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="numPages">Number of Pages</label>
+              <input
+                class="form-control"
+                id="numPages"
+                type="number"
+                required
+                [ngModel]="editBook.numPages"
+                name="numPages"
+              />
+            </div>
+            <div class="row">
+              <button
+                class="btn btn-primary"
+                type="submit"
+                [disabled]="!editForm.valid"
+              >
+                Save
+              </button>
+              <button class="btn btn-danger" (click)="onCancelEdit()">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
       <p *ngIf="isFetching">Loading...</p>
     </div>
   </div>
